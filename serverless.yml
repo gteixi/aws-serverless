@@ -19,7 +19,7 @@ functions:
 resources:
   Resources:
     TodoTable:
-      Tpye: AWS::DynamoDB::Table
+      Type: AWS::DynamoDB::Table
       Properties:
         TableName: TodoTable
         BillingMode: PAY_PER_REQUEST
