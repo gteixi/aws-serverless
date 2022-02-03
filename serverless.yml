@@ -7,14 +7,38 @@ provider:
   name: aws
   runtime: nodejs14.x
   region: eu-west-3
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource:
+        - arn:aws:dynamodb:eu-west-3:631608739166:table/TodoTable
 
 functions:
-  hello:
-    handler: src/hello.handler
+  addTodo:
+    handler: src/addTodo.handler
     events:
       - httpApi:
           path: /
+          method: post
+  fetchTodos:
+    handler: src/fetchTodos.handler
+    events:
+      - httpApi:
+          path: /todos
           method: get
+  fetchTodo:
+    handler: src/fetchTodo.handler
+    events:
+      - httpApi:
+          path: /todo/{id}
+          method: get
+  updateTodo:
+    handler: src/updateTodo.handler
+    events:
+      - httpApi:
+          path: /todo/{id}
+          method: put
 
 resources:
   Resources:
